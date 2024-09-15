@@ -1,4 +1,3 @@
-# Import necessary libraries
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -6,18 +5,24 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-# Load the dataset (assuming you have a CSV file, replace 'house_data.csv' with the actual file path)
-# Sample columns could be: 'size', 'bedrooms', 'bathrooms', 'floors', 'age', 'price'
-df = pd.read_csv('house_data.csv')
+# Create a larger sample dataset
+data = {
+    'size': [1500, 1800, 2400, 3000, 3500, 4000, 4500, 5000, 5500, 6000],
+    'bedrooms': [3, 4, 3, 5, 4, 5, 4, 6, 5, 6],
+    'bathrooms': [2, 3, 2, 4, 3, 4, 3, 5, 4, 5],
+    'floors': [1, 2, 1, 2, 2, 3, 2, 3, 3, 3],
+    'age': [10, 15, 20, 5, 8, 6, 7, 10, 12, 14],
+    'price': [400000, 500000, 600000, 700000, 800000, 850000, 900000, 950000, 1000000, 1050000]
+}
+
+# Load the dataset into a DataFrame
+df = pd.DataFrame(data)
 
 # Preview the dataset
 print(df.head())
 
 # Basic information about the dataset
 print(df.info())
-
-# Handle missing values (if any)
-df.fillna(df.mean(), inplace=True)
 
 # Define feature columns and target variable
 X = df[['size', 'bedrooms', 'bathrooms', 'floors', 'age']]  # Features (input variables)
@@ -52,5 +57,5 @@ print(f"Root Mean Squared Error (RMSE): {rmse}")
 print(f"R-squared (R2): {r2}")
 
 # Compare some predicted prices with actual prices
-comparison_df = pd.DataFrame({'Actual Price': y_test, 'Predicted Price': y_pred})
+comparison_df = pd.DataFrame({'Actual Price': y_test.values, 'Predicted Price': y_pred})
 print(comparison_df.head())
